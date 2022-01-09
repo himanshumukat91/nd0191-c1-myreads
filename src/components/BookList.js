@@ -20,17 +20,13 @@ export default function BookList(props) {
         />
         <BookShelf
           key="wantToRead"
-          books={props.myBooks.filter(
-            (book) => book.shelf === "wantToRead"
-          )}
+          books={props.myBooks.filter((book) => book.shelf === "wantToRead")}
           updateShelf={props.updateShelf}
           shelfTitle="Want to Read"
         />
         <BookShelf
           key="read"
-          books={props.myBooks.filter(
-            (book) => book.shelf === "read"
-          )}
+          books={props.myBooks.filter((book) => book.shelf === "read")}
           updateShelf={props.updateShelf}
           shelfTitle="Read"
         />
