@@ -2,15 +2,15 @@ import "../App.css";
 
 export default function BookShelf(props) {
   const shelfBooks = (props.books || []).filter((book) => book.imageLinks);
-  
+
   return (
     <div className="bookshelf">
       <h2 className="bookshelf-title">{props.shelfTitle}</h2>
       <div className="bookshelf-books">
         <ol className="books-grid">
           {shelfBooks.length ? (
-            shelfBooks.map((book) => (
-              <li>
+            shelfBooks.map((book, i) => (
+              <li key={i}>
                 <div className="book">
                   <div className="book-top">
                     <div
