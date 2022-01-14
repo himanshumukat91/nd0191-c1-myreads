@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import BookSearch from "./components/BookSearch";
 import BookList from "./components/BookList";
@@ -14,7 +16,7 @@ function App() {
     getAll().then((res) => {
       res && setMyBooks(res);
     });
-  },[]);
+  }, []);
 
   const updateShelf = async (book, newShelf) => {
     try {
@@ -32,34 +34,39 @@ function App() {
         updatedBooks.push({ ...book, shelf: newShelf });
       }
       setMyBooks(updatedBooks);
+      toast.success(createSuccessToast(book.title, newShelf));
     } catch (e) {
-      alert(`Error while updating shelf of book ${book.title} to ${newShelf}. Please try again`);
+      toast.error(
+        `Error while updating book '${book.title}' to '${newShelf}''. Please try again`
+      );
     }
   };
 
+  const createSuccessToast = (title = "", shelf = "") => {
+    switch(shelf) {
+      case "none":
+        return `'${title}' successfully removed from library`
+      default:
+        return `'${title}' successfully added to '${shelf}'`
+    }
+  }
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/search"
-          element={
-            <BookSearch
-              myBooks={myBooks}
-              updateShelf={updateShelf}
-            />
-          }
-        />
-        <Route
-          path="/"
-          element={
-            <BookList
-              myBooks={myBooks}
-              updateShelf={updateShelf}
-            />
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/search"
+            element={<BookSearch myBooks={myBooks} updateShelf={updateShelf} />}
+          />
+          <Route
+            path="/"
+            element={<BookList myBooks={myBooks} updateShelf={updateShelf} />}
+          />
+        </Routes>
+      </BrowserRouter>
+      <ToastContainer position="bottom-center" autoClose={2500} closeOnClick />
+    </div>
   );
 }
 
