@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { search } from "../utils/BooksAPI";
 import { debounce } from "../utils/helpers";
@@ -14,7 +14,7 @@ export default function BookSearch(props) {
     books?.length ? setSearchedBooks(books) : setSearchedBooks([]);
   };
 
-  const debouncedSearch = debounce(searchBooks, 300);
+  const debouncedSearch = useRef(debounce(searchBooks, 300)).current;
 
   searchedBooks?.forEach((book) => {
     const myBook = props.myBooks.find((b) => b.id === book.id);

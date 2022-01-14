@@ -9,8 +9,8 @@ export default function BookShelf(props) {
       <div className="bookshelf-books">
         <ol className="books-grid">
           {shelfBooks.length ? (
-            shelfBooks.map((book, i) => (
-              <li key={i}>
+            shelfBooks.map((book) => (
+              <li key={book.id}>
                 <div className="book">
                   <div className="book-top">
                     <div
@@ -41,9 +41,12 @@ export default function BookShelf(props) {
                     </div>
                   </div>
                   <div className="book-title">{book.title}</div>
-                  <div className="book-authors">
-                    {book.authors ? book.authors[0] : ""}
-                  </div>
+                  {book.authors
+                  ?book.authors.map((author, i) => (
+                    <div key={author || i} className="book-authors">
+                      {author}
+                    </div>))
+                  :null}
                 </div>
               </li>
             ))
