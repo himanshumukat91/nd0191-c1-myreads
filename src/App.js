@@ -65,7 +65,7 @@ function App() {
           />
         </Routes>
       </BrowserRouter>
-      <ToastContainer position="bottom-center" autoClose={2500} closeOnClick />
+      <ToastContainer position="bottom-center" autoClose={2500} closeOnClick newestOnTop />
     </div>
   );
 }

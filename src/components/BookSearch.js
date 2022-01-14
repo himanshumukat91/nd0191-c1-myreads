@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
+import { toast } from "react-toastify";
+
 import { Link } from "react-router-dom";
 import { search } from "../utils/BooksAPI";
 import { debounce } from "../utils/helpers";
@@ -17,7 +19,13 @@ export default function BookSearch(props) {
 
   const searchBooks = async (searchString) => {
     const books = await search(searchString);
-    books?.length ? setSearchedBooks(books) : setSearchedBooks([]);
+    if(books?.length){
+        setSearchedBooks(books);
+        toast.info(`${books.length} books found for search - '${searchString}'`);
+    } else {
+        setSearchedBooks([]);
+        toast.info(`No books found for search - '${searchString}'`);
+    }
   };
 
   const debouncedSearch = useRef(debounce(searchBooks, 300)).current;
