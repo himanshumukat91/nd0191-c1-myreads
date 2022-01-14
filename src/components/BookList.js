@@ -1,7 +1,13 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import BookShelf from "./BookShelf";
+
+BookList.propTypes = {
+  myBooks: PropTypes.array.isRequired,
+  updateShelf: PropTypes.func.isRequired,
+};
 
 export default function BookList(props) {
   return (

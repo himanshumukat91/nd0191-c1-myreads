@@ -1,9 +1,15 @@
 import React, { useState, useRef } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { search } from "../utils/BooksAPI";
 import { debounce } from "../utils/helpers";
 
 import BookShelf from "./BookShelf";
+
+BookSearch.propTypes = {
+  myBooks: PropTypes.array.isRequired,
+  updateShelf: PropTypes.func.isRequired,
+};
 
 export default function BookSearch(props) {
   const [query, setQuery] = useState("");

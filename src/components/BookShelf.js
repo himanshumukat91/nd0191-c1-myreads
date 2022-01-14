@@ -1,4 +1,13 @@
+
+import React from "react";
+import PropTypes from "prop-types";
 import "../App.css";
+
+BookShelf.propTypes = {
+  books: PropTypes.array.isRequired,
+  updateShelf: PropTypes.func.isRequired,
+  shelfTitle: PropTypes.string,
+};
 
 export default function BookShelf(props) {
   const shelfBooks = (props.books || []).filter((book) => book.imageLinks);
